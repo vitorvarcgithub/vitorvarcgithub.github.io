@@ -6,8 +6,157 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Feliz dia dos Namorados Amor</title>
     <link href="https://fonts.googleapis.com/css?family=Manrope:200,300,regular,500,600,700,800" rel="stylesheet" />
-       <link rel="stylesheet" href="./style.css">
+
 </head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+
+        background-image: linear-gradient(to right, #ff333d5d, #0513d35b);
+    }
+
+    .container {
+
+        margin: 10px;
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+        border-radius: 1rem;
+        position: relative;
+        text-align: center;
+    }
+
+    .img {
+        width: 100%;
+        border-radius: 1rem;
+        max-width: 100%;
+        height: auto;
+        transition: opacity 100s ease;
+    }
+
+    .none {
+        display: none;
+        opacity: 0;
+        transition: 500s;
+    }
+
+    .button {
+        width: 3rem;
+        height: 3rem;
+        top: 15rem;
+        right: 1rem;
+        border-radius: 100%;
+        position: absolute;
+        z-index: 2;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        padding-top: 0.2rem;
+        border: none;
+        color: rgba(255, 255, 255, 0.274);
+        background-image: linear-gradient(to right, #ff333d5d, #0513d35b);
+    }
+
+
+    .senha {
+        max-width: 100%;
+        height: 50%;
+        margin: 45% 10%;
+        padding: 20px;
+        background-color: #f0f0f0;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .senha h2,
+    #mensagemSucesso {
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+        font-size: 24px;
+        color: #ff3366;
+        margin-bottom: 20px;
+    }
+
+    #mensagemSucesso {
+        margin-top: 30px;
+    }
+
+    .senha input[type="text"] {
+        padding: 10px;
+        font-size: 16px;
+        border: 2px solid #ff3366;
+        border-radius: 5px;
+        width: 100%;
+        box-sizing: border-box;
+        transition: border-color 0.3s ease;
+    }
+
+    .senha input[type="text"]:focus {
+        border-color: #4CAF50;
+    }
+
+    .senha::before {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 10px;
+        background-image: linear-gradient(to right, #ff333dc5, #0513d3c0);
+        border-radius: 5px 5px 0 0;
+        margin-bottom: 10px;
+    }
+
+
+
+    .senha h2 {
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+        font-size: 24px;
+        color: #ff3366;
+        margin-bottom: 20px;
+    }
+
+    .senha form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+
+    .senha button {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #ff3366;
+        color: #fff;
+        border: none;
+        border-radius: 0 5px 5px 0;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .senha button:hover {
+        background-color: #4CAF50;
+        transform: scale(1.1);
+    }
+
+    .senha button:focus {
+        outline: none;
+    }
+
+    .img-presente {
+        width: 100px;
+    }
+
+    @media (max-width: 768px) {
+        .container {
+            width: auto;
+            height: auto;
+        }
+
+    }
+</style>
 
 <body>
     <div class="senha">
@@ -16,8 +165,10 @@
             <input type="text" id="senhaInput" placeholder="digite aqui">
             <button type="submit" id="verificarSenhaBtn">Verificar</button>
         </form>
-        <p id="mensagemSucesso"></p> <!-- Elemento para exibir mensagem de sucesso -->
+        <p id="mensagemSucesso"></p>
+        <div class="presente none"><img class="img-presente" src="./assets/4530656.png" alt=""></div>
     </div>
+
 
     <div class="container none">
         <a href="./index.html"><img id="img1" class="img" src="./assets/1.png" alt=""></a>
@@ -34,13 +185,8 @@
         let currentIndex = 0;
 
         nextButton.addEventListener('click', function () {
-            // Esconde a imagem atual
             imagens[currentIndex].classList.add('none');
-
-            // Avança para a próxima imagem
             currentIndex = (currentIndex + 1) % imagens.length;
-
-            // Mostra a próxima imagem
             imagens[currentIndex].classList.remove('none');
         });
 
@@ -50,6 +196,7 @@
             const container = document.querySelector('.container');
             const mensagemSucesso = document.getElementById('mensagemSucesso');
             const senha = document.querySelector('.senha');
+            const presente = document.querySelector('.presente');
             let tentativas = 0; // Variável para contar o número de tentativas
 
             senhaForm.addEventListener('submit', function (event) {
@@ -58,9 +205,15 @@
                 const senhaDigitada = senhaInput.value.trim();
 
                 if (senhaDigitada.toLowerCase() === 'asmei') {
-                    mensagemSucesso.textContent = 'Senha correta! Você acertou!';
-                    container.classList.remove('none'); // Exibe o container com as imagens
-                    senha.classList.add('none')
+                    mensagemSucesso.textContent = 'Oi amor. tenho um preentinho pra você.❤️';
+                    container.classList.remove('none');
+                    presente.classList.remove('none')
+
+                    presente.addEventListener('click', () => {
+                        senha.classList.add('none')
+                    })
+
+
                 } else {
                     tentativas++;
                     if (tentativas === 3) {
